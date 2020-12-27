@@ -10,10 +10,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
+ * <p>A dynamic electrical wiring that maps characters.</p>
  * 
  * @author Alexander Mattes
- *
- * @param <S>
  */
 public class Rotor extends AbstractWheel<Rotor> {
 

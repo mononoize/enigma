@@ -7,10 +7,17 @@ import static de.mononoize.enigma.tools.MathTools.mod;
 import org.apache.commons.lang3.Validate;
 
 /**
+ * <p>Base class for all dynamic electrical wirings.</p>
+ * 
+ * <p>A dynamic wiring maps each character of the Latin alphabet to exactly one other character of the Latin alphabet
+ * just like normal  wiring. The only difference is that a wheel is able to rotate to modify the mapping.</p>
+ * 
+ * @see Reflector
+ * @see Rotor
  * 
  * @author Alexander Mattes
  *
- * @param <S>
+ * @param <S> The self type to enable a type-safe fluent API.
  */
 public abstract class AbstractWheel<S extends AbstractWheel<?>> extends AbstractWiring<S> {
 	

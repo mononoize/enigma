@@ -7,10 +7,23 @@ import static de.mononoize.enigma.tools.CharTools.toIndex;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
+ * <p>Base class for all electrical wirings.</p>
+ * 
+ * <p>A wiring maps each character of the Latin alphabet to exactly one other character of the Latin alphabet. Usually,
+ * a character is not mapped to itself. The mapping is bi-directional, i.e. the wiring can be passed in forward as well
+ * as reverse direction.</p>
+ * 
+ * <p>For example: If a wiring maps the character {@code 'A'} to the character {@code 'E'} the forward mapping replaces
+ * {@code 'A'} with {@code 'E'} and the reverse mapping replaces {@code 'E'} with {@code 'A'}.</p>
+ * 
+ * @see AbstractWheel
+ * @see Reflector
+ * @see Rotor
+ * @see Plugboard
  * 
  * @author Alexander Mattes
  *
- * @param <S>
+ * @param <S> The self type to enable a type-safe fluent API.
  */
 public abstract class AbstractWiring<S extends AbstractWiring<?>> {
 	

@@ -9,10 +9,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
+ * <p>A static/dynamic electrical wiring that swaps characters pairwise.</p>
  * 
  * @author Alexander Mattes
- *
- * @param <S>
  */
 public class Reflector extends AbstractWheel<Reflector> {
 	
