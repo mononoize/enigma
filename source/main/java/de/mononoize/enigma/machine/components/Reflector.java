@@ -31,6 +31,42 @@ public class Reflector extends AbstractWheel<Reflector> {
 		super(name, description, wiring);
 	}
 
+	/**
+	 * Returns reflector 'A' used in the Enimga I.
+	 *  
+	 * @return Reflector 'A' used in the Enimga I.
+	 */
+	public static final Reflector getReflectorA() {
+		return new Reflector( //
+				"UKW A", //
+				"Reflector 'A' used in the Enimga I.", //
+				"EJMZALYXVBWFCRQUONTSPIKHGD");
+	}
+	
+	/**
+	 * Returns reflector 'B' used in the Enimga I, Enigma M3, and Enigma M4.
+	 *  
+	 * @return Reflector 'B' used in the Enimga I, Enigma M3, and Enigma M4.
+	 */
+	public static final Reflector getReflectorB() {
+		return new Reflector( //
+				"UKW B", //
+				"Reflector 'B' used in the Enimga I, Enigma M3, and Enigma M4.", //
+				"YRUHQSLDPXNGOKMIEBFZCWVJAT");
+	}
+	
+	/**
+	 * Returns reflector 'C' used in the Enimga I, Enigma M3, and Enigma M4.
+	 *  
+	 * @return Reflector 'C' used in the Enimga I, Enigma M3, and Enigma M4.
+	 */
+	public static final Reflector getReflectorC() {
+		return new Reflector( //
+				"UKW C", //
+				"Reflector 'C' used in the Enimga I, Enigma M3, and Enigma M4.", //
+				"FVPJIAOYEDRZXWGCTKUQSBNMHL");
+	}
+
 	@Override
 	public char getForward(final char inputCharacter) {
 		Validate.inclusiveBetween('A', 'Z', inputCharacter);

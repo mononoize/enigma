@@ -44,6 +44,109 @@ public class Rotor extends AbstractWheel<Rotor> {
 		this.m_notches = notches.toCharArray();
 	}
 	
+	/**
+	 * Returns rotor 'I' used in the Enigma I, Enigma M3, and Enigma M4.
+	 *  
+	 * @return Rotor 'I' used in the Enigma I, Enigma M3, and Enigma M4.
+	 */
+	public static final Rotor getRotorI() {
+		return new Rotor( //
+				"ROT I", //
+				"Rotor 'I' used in the Enigma I, Enigma M3, and Enigma M4", //
+				"EKMFLGDQVZNTOWYHXUSPAIBRCJ", //
+				"Q");
+	}
+	
+	/**
+	 * Returns rotor 'II' used in the Enigma I, Enigma M3, and Enigma M4.
+	 *  
+	 * @return Rotor 'II' used in the Enigma I, Enigma M3, and Enigma M4.
+	 */
+	public static final Rotor getRotorII() {
+		return new Rotor( //
+				"ROT II", //
+				"Rotor 'II' used in the Enigma I, Enigma M3, and Enigma M4.", //
+				"AJDKSIRUXBLHWTMCQGZNPYFVOE", //
+				"E");
+	}
+	
+	/**
+	 * Returns rotor 'III' used in the Enigma I, Enigma M3, and Enigma M4.
+	 *  
+	 * @return Rotor 'III' used in the Enigma I, Enigma M3, and Enigma M4.
+	 */
+	public static final Rotor getRotorIII() {
+		return new Rotor( //
+				"ROT III",
+				"Rotor 'III' used in the Enigma I, Enigma M3, and Enigma M4.",
+				"BDFHJLCPRTXVZNYEIWGAKMUSQO",
+				"V");
+	}
+	
+	/**
+	 * Returns rotor 'IV' used in the Enigma I, Enigma M3, and Enigma M4.
+	 *  
+	 * @return Rotor 'IV' used in the Enigma I, Enigma M3, and Enigma M4.
+	 */
+	public static final Rotor getRotorIV() {
+		return new Rotor( //
+				"ROT IV", //
+				"TRotor 'IV' used in the Enigma I, Enigma M3, and Enigma M4.", //
+				"ESOVPZJAYQUIRHXLNFTGKDCMWB", //
+				"J");
+	}
+	
+	/**
+	 * Returns rotor 'V' used in the Enigma I, Enigma M3, and Enigma M4.
+	 *  
+	 * @return Rotor 'V' used in the Enigma I, Enigma M3, and Enigma M4.
+	 */
+	public static final Rotor getRotorV() {
+		return new Rotor( //
+				"ROT V", //
+				"Rotor 'V' used in the Enigma I, Enigma M3, and Enigma M4.", //
+				"VZBRGITYUPSDNHLXAWMJQOFECK", //
+				"Z");
+	}
+	
+	/**
+	 * Returns rotor 'VI' used in the Enigma M3 and Enigma M4.
+	 *  
+	 * @return Rotor 'VI' used in the Enigma M3 and Enigma M4.
+	 */
+	public static final Rotor getRotorVI() {
+		return new Rotor( //
+				"ROT VI", //
+				"Rotor 'VI' used in the Enigma M3, and Enigma M4.", //
+				"JPGVOUMFYQBENHZRDKASXLICTW", // 
+				"ZM");
+	}
+	
+	/**
+	 * Returns rotor 'VII' used in the Enigma M3 and Enigma M4.
+	 *  
+	 * @return Rotor 'VII' used in the Enigma M3 and Enigma M4.
+	 */
+	public static final Rotor getRotorVII() {
+		return new Rotor( //
+				"ROT VII", //
+				"Rotor 'VII' used in the Enigma M3, and Enigma M4.", //
+				"NZJHGRCXMYSWBOUFAIVLPEKQDT", //
+				"ZM");
+	}
+		
+	/**
+	 * Returns rotor 'VIII' used in the Enigma M3 and Enigma M4.
+	 *  
+	 * @return Rotor 'VIII' used in the Enigma M3 and Enigma M4.
+	 */
+	public static final Rotor getRotorVIII() {
+		return new Rotor( //
+				"ROT VIII", //
+				"Rotor 'VIII' used in the Enigma M3, and Enigma M4.", //
+				"FKQHTLXOCBJSPDZRAMEWNIUYGV", //
+				"ZM");
+	}
 	@Override
 	public char getForward(final char inputCharacter) {
 		Validate.inclusiveBetween('A', 'Z', inputCharacter);
