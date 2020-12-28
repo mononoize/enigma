@@ -45,6 +45,19 @@ public class Rotor extends AbstractWheel<Rotor> {
 	}
 	
 	/**
+	 * Returns a neutral rotor that doesn't affect the encoding/decoding.
+	 * 
+	 * @return A neutral rotor that doesn't affect the encoding/decoding
+	 */
+	public static final Rotor getRotorNeutral() {
+		return new Rotor( //
+				"ROT Neutral", //
+				"A neutral rotor that doesn't affect the encoding/decoding.", //
+				"ABCDEFGHIJKLMNOPQRSTUVWXYZ", //
+				"");
+	}
+	
+	/**
 	 * Returns rotor 'I' used in the Enigma I, Enigma M3, and Enigma M4.
 	 *  
 	 * @return Rotor 'I' used in the Enigma I, Enigma M3, and Enigma M4.
@@ -147,6 +160,33 @@ public class Rotor extends AbstractWheel<Rotor> {
 				"FKQHTLXOCBJSPDZRAMEWNIUYGV", //
 				"ZM");
 	}
+	
+	/**
+	 * Returns rotor 'Beta' used in the Enimga M4.
+	 *  
+	 * @return Rotor 'Beta' used in the Enimga M4.
+	 */
+	public static final Rotor getRotorBeta() {
+		return new Rotor( //
+				"ROT Beta", //
+				"Rotor 'Beta' used in the Enimga M4.", //
+				"LEYJVCNIXWPBQMDRTAKZGFUHOS", //
+				"");
+	}
+	
+	/**
+	 * Returns rotor 'Gamma' used in the Enimga M4.
+	 *  
+	 * @return Rotor 'Gamma' used in the Enimga M4.
+	 */
+	public static final Rotor getRotorGamma() {
+		return new Rotor( //
+				"ROT Gamma", //
+				"Rotor 'Gamma' used in the Enimga M4.", //
+				"FSOKANUERHMBTIYCWLQPZXVGJD", //
+				"");
+	}	
+	
 	@Override
 	public char getForward(final char inputCharacter) {
 		Validate.inclusiveBetween('A', 'Z', inputCharacter);

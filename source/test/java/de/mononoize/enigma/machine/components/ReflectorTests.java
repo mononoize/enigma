@@ -51,7 +51,7 @@ public class ReflectorTests {
 	}
 	
 	@Test
-	@Order(104)
+	@Order(103)
 	public void testGetForward() {
 		final Reflector reflector = Reflector.getReflectorA();
 		
@@ -67,7 +67,7 @@ public class ReflectorTests {
 	}
 	
 	@Test
-	@Order(105)
+	@Order(104)
 	public void testGetReverse() {
 		final Reflector reflector = Reflector.getReflectorA();
 		
@@ -112,6 +112,30 @@ public class ReflectorTests {
 		final char[] wiring = "FVPJIAOYEDRZXWGCTKUQSBNMHL".toCharArray();
 		
 		final Reflector reflector = Reflector.getReflectorC();
+		
+		testWiringForward(reflector, wiring);
+		testWiringReverse(reflector, wiring);
+		testWiring(reflector, wiring);
+	}
+	
+	@Test
+	@Order(204)
+	public void testReflectorBruno() {
+		final char[] wiring = "ENKQAUYWJICOPBLMDXZVFTHRGS".toCharArray();
+		
+		final Reflector reflector = Reflector.getReflectorBruno();
+		
+		testWiringForward(reflector, wiring);
+		testWiringReverse(reflector, wiring);
+		testWiring(reflector, wiring);
+	}
+	
+	@Test
+	@Order(205)
+	public void testReflectorCaesar() {
+		final char[] wiring = "RDOBJNTKVEHMLFCWZAXGYIPSUQ".toCharArray();
+		
+		final Reflector reflector = Reflector.getReflectorCaesar();
 		
 		testWiringForward(reflector, wiring);
 		testWiringReverse(reflector, wiring);

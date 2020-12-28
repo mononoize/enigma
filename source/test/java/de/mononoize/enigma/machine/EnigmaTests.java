@@ -1,6 +1,8 @@
 package de.mononoize.enigma.machine;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -20,6 +22,32 @@ public class EnigmaTests {
 
 	@Test
 	@Order(101)
+	public void testBuilder() {
+		final Enigma.Builder builder = new Enigma.Builder();
+		
+		assertThrows(NullPointerException.class, () -> builder.build());
+		 
+		builder.setReflector(Reflector.getReflectorA());
+		assertThrows(NullPointerException.class, () -> builder.build());
+				
+		builder.setRotor1(Rotor.getRotorNeutral(), 'A', 'A');
+		assertThrows(NullPointerException.class, () -> builder.build());
+
+		builder.setRotor2(Rotor.getRotorNeutral(), 'A', 'A');
+		assertThrows(NullPointerException.class, () -> builder.build());
+		
+		builder.setRotor3(Rotor.getRotorNeutral(), 'A', 'A');
+		assertTrue(builder.build() instanceof Enigma);
+		
+		builder.setRotor4(Rotor.getRotorNeutral(), 'A', 'A');
+		assertTrue(builder.build() instanceof Enigma);
+
+		builder.addCable('A','A');
+		assertTrue(builder.build() instanceof Enigma);
+	}
+	
+	@Test
+	@Order(102)
 	public void testEncodingDecoding() {
 		final String text = //
 				"LOREM IPSUM DOLOR SITAM ETCON SETET URSAD IPSCI NGELI TRSED DIAMN ONUMY EIRMO DTEMP ORINV " //
@@ -263,6 +291,61 @@ public class EnigmaTests {
 				.setRotor2(Rotor.getRotorVI(), 8, 'Z') //
 				.setRotor3(Rotor.getRotorIII(), 1, 'U') //
 				.setReflector(Reflector.getReflectorB()) //
+				.build();
+		
+		assertEquals(code, encodeEnigma.decode(text));
+		assertEquals(text, decodeEnigma.decode(code));
+	}
+	
+	@Test
+	@Order(205)
+	public void testHistoricalMessage05() {
+		final String text = //
+				"VONVO NJLOO KSJHF FTTTE INSEI NSDRE IZWOY YQNNS NEUNI NHALT XXBEI ANGRI FFUNT ERWAS SERGE " //
+			  + "DRUEC KTYWA BOSXL ETZTE RGEGN ERSTA NDNUL ACHTD REINU LUHRM ARQUA NTONJ OTANE UNACH TSEYH " //
+			  + "SDREI YZWOZ WONUL GRADY ACHTS MYSTO SSENA CHXEK NSVIE RMBFA ELLTY NNNNN NOOOV IERYS ICHTE " //
+			  + "INSNU LL---"; 
+		
+		final String code = //
+				"NCZWV USXPN YMINH ZXMQX SFWXW LKJAH SHNMC OCCAK UQPMK CSMHK SEINJ USBLK IOSXC KUBHM LLXCS " //
+			  + "JUSRR DVKOH ULXWC CBGVL IYXEO AHXRH KKFVD REWEZ LXOBA FGYUJ QUKGR TVUKA MEURB VEKSU HHVOY " //
+		      + "HABCJ WMAKL FKLMY FVNRI ZRVVR TKOFD ANJMO LBGFF LEOPR GTFLV RHOWO PBEKV WMUQF MPWPA RMFHA " //
+			  + "GKXII BG---";
+		
+		final Enigma encodeEnigma = new Enigma.Builder() //
+				.addCable('A', 'T') //
+				.addCable('B', 'L') //
+				.addCable('D', 'F') //
+				.addCable('G', 'J') //
+				.addCable('H', 'M') //
+				.addCable('N', 'W') //
+				.addCable('O', 'P') //
+				.addCable('Q', 'Y') //
+				.addCable('R', 'Z') //
+				.addCable('V', 'X') //
+				.setRotor1(Rotor.getRotorI(), 22, 'A') //
+				.setRotor2(Rotor.getRotorIV(), 1, 'N') //
+				.setRotor3(Rotor.getRotorII(), 1, 'J') //
+				.setRotor4(Rotor.getRotorBeta(), 1, 'V') //
+				.setReflector(Reflector.getReflectorBruno()) //
+				.build();
+		
+		final Enigma decodeEnigma = new Enigma.Builder() //
+				.addCable('A', 'T') //
+				.addCable('B', 'L') //
+				.addCable('D', 'F') //
+				.addCable('G', 'J') //
+				.addCable('H', 'M') //
+				.addCable('N', 'W') //
+				.addCable('O', 'P') //
+				.addCable('Q', 'Y') //
+				.addCable('R', 'Z') //
+				.addCable('V', 'X') //
+				.setRotor1(Rotor.getRotorI(), 22, 'A') //
+				.setRotor2(Rotor.getRotorIV(), 1, 'N') //
+				.setRotor3(Rotor.getRotorII(), 1, 'J') //
+				.setRotor4(Rotor.getRotorBeta(), 1, 'V') //
+				.setReflector(Reflector.getReflectorBruno()) //
 				.build();
 		
 		assertEquals(code, encodeEnigma.decode(text));

@@ -66,6 +66,30 @@ public class Reflector extends AbstractWheel<Reflector> {
 				"Reflector 'C' used in the Enimga I, Enigma M3, and Enigma M4.", //
 				"FVPJIAOYEDRZXWGCTKUQSBNMHL");
 	}
+	
+	/**
+	 * Returns reflector 'Bruno' or 'Thin B' used in the Enigma M4.
+	 *  
+	 * @return Reflector 'Bruno' or 'Thin B' used in the Enigma M4.
+	 */
+	public static final Reflector getReflectorBruno() {
+		return new Reflector( //
+				"UKW Bruno", //
+				"Reflector 'Bruno' or 'Thin B' used in the Enigma M4.", //
+				"ENKQAUYWJICOPBLMDXZVFTHRGS");
+	}
+	
+	/**
+	 * Returns reflector 'Caesar' or 'Thin C' used in the Enigma M4.
+	 *  
+	 * @return Reflector 'Caesar' or 'Thin C' used in the Enigma M4.
+	 */
+	public static final Reflector getReflectorCaesar() {
+		return new Reflector( //
+				"UKW Caesar", //
+				"Reflector 'Caesar' or 'Thin C' used in the Enigma M4.", //
+				"RDOBJNTKVEHMLFCWZAXGYIPSUQ");
+	}
 
 	@Override
 	public char getForward(final char inputCharacter) {
