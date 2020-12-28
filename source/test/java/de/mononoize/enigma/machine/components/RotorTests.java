@@ -234,7 +234,37 @@ public class RotorTests {
 		testWiring(rotor, wiringForward, wiringReverse);
 		testNotches(rotor, notches);
 	}
+
+	@Test
+	@Order(209)
+	public void testRotorBeta() {
+		final char[] wiringForward = "LEYJVCNIXWPBQMDRTAKZGFUHOS".toCharArray();
+		final char[] wiringReverse = "RLFOBVUXHDSANGYKMPZQWEJICT".toCharArray();
+		final char[] notches = "".toCharArray();
+				
+		final Rotor rotor = Rotor.getRotorBeta();
+					
+		testWiringForward(rotor, wiringForward);
+		testWiringReverse(rotor, wiringReverse);
+		testWiring(rotor, wiringForward, wiringReverse);
+		testNotches(rotor, notches);
+	}
+	
+	@Test
+	@Order(210)
+	public void testRotorGamma() {
+		final char[] wiringForward = "FSOKANUERHMBTIYCWLQPZXVGJD".toCharArray();
+		final char[] wiringReverse = "ELPZHAXJNYDRKFCTSIBMGWQVOU".toCharArray();
+		final char[] notches = "".toCharArray();
 		
+		final Rotor rotor = Rotor.getRotorGamma();
+		
+		testWiringForward(rotor, wiringForward);
+		testWiringReverse(rotor, wiringReverse);
+		testWiring(rotor, wiringForward, wiringReverse);
+		testNotches(rotor, notches);
+	}	
+	
 	private static void testWiringForward(final Rotor rotor, final char[] wiringForward) {
 		rotor.setPositionRing('A');
 		rotor.setPosition('A');

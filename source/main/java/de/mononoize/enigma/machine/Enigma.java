@@ -37,6 +37,8 @@ public class Enigma {
 		
 		private Rotor m_rotor3;
 
+		private Rotor m_rotor4 = Rotor.getRotorNeutral();
+
 		private Reflector m_reflector;
 	 
 		public Builder() {
@@ -71,7 +73,17 @@ public class Enigma {
 			this.m_rotor3 = rotor.setPositionRing(ringPosition).setPosition(position);
 			return this;
 		}
-			
+		
+		public Builder setRotor4(final Rotor rotor, final char ringPosition, final char position) {
+			this.m_rotor4 = rotor.setPositionRing(ringPosition).setPosition(position);
+			return this;
+		}
+		
+		public Builder setRotor4(final Rotor rotor, final int ringPosition, final char position) {
+			this.m_rotor4 = rotor.setPositionRing(ringPosition).setPosition(position);
+			return this;
+		}
+		
 		public Builder setReflector(final Reflector reflector) {
 			this.m_reflector = reflector;
 			return this;
@@ -87,6 +99,7 @@ public class Enigma {
 			Validate.notNull(this.m_rotor1);
 			Validate.notNull(this.m_rotor2);
 			Validate.notNull(this.m_rotor3);
+			Validate.notNull(this.m_rotor4);
 			Validate.notNull(this.m_reflector);
 			
 			return new Enigma(this);
@@ -117,7 +130,12 @@ public class Enigma {
 	 * The 3rd (left) rotor.
 	 */
 	private Rotor m_rotor3;
-		
+	
+	/**
+	 * The 4th (left) rotor.
+	 */
+	private Rotor m_rotor4;
+	
 	/**
 	 * The reflector.
 	 */
@@ -132,6 +150,7 @@ public class Enigma {
 		this.m_rotor1 = builder.m_rotor1;
 		this.m_rotor2 = builder.m_rotor2;
 		this.m_rotor3 = builder.m_rotor3;
+		this.m_rotor4 = builder.m_rotor4;
 		this.m_reflector = builder.m_reflector;
 		this.m_plugboard = builder.m_plugboard;
 	}
@@ -196,10 +215,12 @@ public class Enigma {
 			final char forwardRotor1 = this.m_rotor1.getForward(forwardPlugboard);
 			final char forwardRotor2 = this.m_rotor2.getForward(forwardRotor1);
 			final char forwardRotor3 = this.m_rotor3.getForward(forwardRotor2);
+			final char forwardRotor4 = this.m_rotor4.getForward(forwardRotor3);
 			
-			final char reflector = this.m_reflector.getForward(forwardRotor3);
+			final char reflector = this.m_reflector.getForward(forwardRotor4);
 			
-			final char reverseRotor3 = this.m_rotor3.getReverse(reflector);
+			final char reverseRotor4 = this.m_rotor4.getReverse(reflector);
+			final char reverseRotor3 = this.m_rotor3.getReverse(reverseRotor4);
 			final char reverseRotor2 = this.m_rotor2.getReverse(reverseRotor3);
 			final char reverseRotor1 = this.m_rotor1.getReverse(reverseRotor2);
 			
