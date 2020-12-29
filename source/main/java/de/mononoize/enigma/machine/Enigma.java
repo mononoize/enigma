@@ -73,14 +73,14 @@ public class Enigma {
 			this.m_rotor3 = rotor.setPositionRing(ringPosition).setPosition(position);
 			return this;
 		}
-		
-		public Builder setRotor4(final Rotor rotor, final char ringPosition, final char position) {
+
+		public Builder setRotor4(final Rotor rotor, final int ringPosition, final char position) {
 			this.m_rotor4 = rotor.setPositionRing(ringPosition).setPosition(position);
 			return this;
 		}
 		
-		public Builder setRotor4(final Rotor rotor, final int ringPosition, final char position) {
-			this.m_rotor4 = rotor.setPositionRing(ringPosition).setPosition(position);
+		public Builder setRotor4(final Rotor rotor, final char positionRing, final char position) {
+			this.m_rotor4 = rotor.setPositionRing(positionRing).setPosition(position);
 			return this;
 		}
 		
@@ -94,6 +94,16 @@ public class Enigma {
 			return this;
 		}
 		
+		public Builder addCable(final String cable) {
+			this.m_plugboard.addCable(cable);
+			return this;
+		}
+				
+		public Builder addCables(final String ... cables) {
+			this.m_plugboard.addCables(cables);
+			return this;
+		}
+				
 		@Override
 		public Enigma build() {
 			Validate.notNull(this.m_rotor1);
@@ -132,7 +142,7 @@ public class Enigma {
 	private Rotor m_rotor3;
 	
 	/**
-	 * The 4th (left) rotor.
+	 * The 4th (optional) (leftmost) rotor.
 	 */
 	private Rotor m_rotor4;
 	
@@ -141,6 +151,31 @@ public class Enigma {
 	 */
 	private Reflector m_reflector;
 
+	/**
+	 * The setting of the 1st (right) rotor.
+	 */
+	private char[] m_rotor1Setting = new char[2];
+
+	/**
+	 * The setting of the 2nd (middle) rotor.
+	 */
+	private char[] m_rotor2Setting = new char[2];
+
+	/**
+	 * The setting of the 3rd (left) rotor.
+	 */
+	private char[] m_rotor3Setting = new char[2];
+
+	/**
+	 * The setting of the 4th (optional) (leftmost) rotor.
+	 */
+	private char[] m_rotor4Setting = new char[2];
+
+	/**
+	 * The setting of the reflector.
+	 */
+	private char m_reflectorSetting;
+	
 	/**
 	 * Constructs a new {@code Enigma} using the given builder.
 	 * 
@@ -153,6 +188,29 @@ public class Enigma {
 		this.m_rotor4 = builder.m_rotor4;
 		this.m_reflector = builder.m_reflector;
 		this.m_plugboard = builder.m_plugboard;
+		
+		this.m_rotor1Setting[0] = this.m_rotor1.getPostionRing();
+		this.m_rotor1Setting[1] = this.m_rotor1.getPosition();	
+		this.m_rotor2Setting[0] = this.m_rotor2.getPostionRing();
+		this.m_rotor2Setting[1] = this.m_rotor2.getPosition();
+		this.m_rotor3Setting[0] = this.m_rotor3.getPostionRing();
+		this.m_rotor3Setting[1] = this.m_rotor3.getPosition();
+		this.m_rotor4Setting[0] = this.m_rotor4.getPostionRing();
+		this.m_rotor4Setting[1] = this.m_rotor4.getPosition();		
+		this.m_reflectorSetting = this.m_reflector.getPosition();
+	}
+	
+	/**
+	 * Reset the setting of all wheels.
+	 * 
+	 * @return A reference to this {@code Enigma}.
+	 */
+	private void reset() {
+		this.m_rotor1.setPositionRing(this.m_rotor1Setting[0]).setPosition(this.m_rotor1Setting[1]);
+		this.m_rotor2.setPositionRing(this.m_rotor2Setting[0]).setPosition(this.m_rotor2Setting[1]);
+		this.m_rotor3.setPositionRing(this.m_rotor3Setting[0]).setPosition(this.m_rotor3Setting[1]);
+		this.m_rotor4.setPositionRing(this.m_rotor4Setting[0]).setPosition(this.m_rotor4Setting[1]);
+		this.m_reflector.setPosition(this.m_reflectorSetting);		
 	}
 	
 	/**
@@ -182,6 +240,8 @@ public class Enigma {
 	 * @return The encoded/decoded text.
 	 */
 	private String process(final String text) {
+		this.reset();
+		
 		final StringBuilder result = new StringBuilder();
 		
 		for (int i = 0; i < text.length(); i++) {

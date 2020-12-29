@@ -67,46 +67,20 @@ public class EnigmaTests {
 			  + "UAJPG NLCRD YACNK OPCIZ PBNBY OASOH JXQNC ZWLQE LWGPK CDDRH CPPWS FRPIV UFPCD JDGQO CYUJS " //
 			  + "JPYJO SRYNV AGIXK ZSFXF VGVAV IQK--";
 		
-		final Enigma encodeEnigma = new Enigma.Builder() //
-				.addCable('A', 'Z') //
-				.addCable('B', 'Y') //
-				.addCable('C', 'X') //
-				.addCable('D', 'W') //
-				.addCable('E', 'V') //
-				.addCable('F', 'U') //
-				.addCable('G', 'T') //
-				.addCable('H', 'S') //
-				.addCable('I', 'R') //
-				.addCable('J', 'Q') //
-				.setRotor1(Rotor.getRotorII(), 5, 'P') //
-				.setRotor2(Rotor.getRotorIII(), 3, 'F') //
+		final Enigma enigma = new Enigma.Builder() //
+				.addCables("AZ", "BY", "CX", "DW", "EV", "FU", "GT", "HS", "IR", "JQ") // 
+				.setRotor1(Rotor.getRotorII(), 5, 'P') // 
+				.setRotor2(Rotor.getRotorIII(), 3, 'F') // 
 				.setRotor3(Rotor.getRotorVII(), 8, 'M') //
 				.setReflector(Reflector.getReflectorB()) //
 				.build();
 		
-		final Enigma decodeEnigma = new Enigma.Builder() //
-				.addCable('A', 'Z') //
-				.addCable('B', 'Y') //
-				.addCable('C', 'X') //
-				.addCable('D', 'W') //
-				.addCable('E', 'V') //
-				.addCable('F', 'U') //
-				.addCable('G', 'T') //
-				.addCable('H', 'S') //
-				.addCable('I', 'R') //
-				.addCable('J', 'Q') //
-				.setRotor1(Rotor.getRotorII(), 5, 'P') //
-				.setRotor2(Rotor.getRotorIII(), 3, 'F') //
-				.setRotor3(Rotor.getRotorVII(), 8, 'M') //
-				.setReflector(Reflector.getReflectorB()) //
-				.build();
-		
-		assertEquals(code, encodeEnigma.decode(text));
-		assertEquals(text, decodeEnigma.decode(code));
-		assertEquals(text, decodeEnigma.decode(encodeEnigma.decode(text)));
-		assertEquals(text, encodeEnigma.decode(decodeEnigma.decode(text)));
+		assertEquals(code, enigma.encode(text));
+		assertEquals(text, enigma.decode(code));
+		assertEquals(text, enigma.decode(enigma.encode(text)));
+		assertEquals(text, enigma.encode(enigma.decode(text)));
 	}
-	
+
 	@Test
 	@Order(201)
 	public void testHistoricalMessage01() {
@@ -118,34 +92,16 @@ public class EnigmaTests {
 				"GCDSE AHUGW TQGRK VLFGX UCALX VYMIG MMNMF DXTGN VHVRM MEVOU YFZSL RHDRR XFJWC FHUHM UNZEF " //
 			  + "RDISI KBGPM YVXUZ";
 		
-		final Enigma encodeEnigma = new Enigma.Builder() //
-				.addCable('A', 'M') //
-				.addCable('F', 'I') //
-				.addCable('N', 'V') //
-				.addCable('P', 'S') //
-				.addCable('T', 'U') //
-				.addCable('W', 'Z') //
-				.setRotor1(Rotor.getRotorIII(), 22, 'L') //
+		final Enigma enigma = new Enigma.Builder() //
+				.addCables("AM", 				"FI", "NV", "PS", "TU", "WZ") // 
+				.setRotor1(Rotor.getRotorIII(), 22, 'L') // 
 				.setRotor2(Rotor.getRotorI(), 13, 'B') //
 				.setRotor3(Rotor.getRotorII(), 24, 'A') //
 				.setReflector(Reflector.getReflectorA()) //
-				.build();
+				.build();	
 		
-		final Enigma decodeEnigma = new Enigma.Builder() //
-				.addCable('A', 'M') //
-				.addCable('F', 'I') //
-				.addCable('N', 'V') //
-				.addCable('P', 'S') //
-				.addCable('T', 'U') //
-				.addCable('W', 'Z') //
-				.setRotor1(Rotor.getRotorIII(), 22, 'L') //
-				.setRotor2(Rotor.getRotorI(), 13, 'B') //
-				.setRotor3(Rotor.getRotorII(), 24, 'A') //
-				.setReflector(Reflector.getReflectorA()) //
-				.build();
-		
-		assertEquals(code, encodeEnigma.decode(text));
-		assertEquals(text, decodeEnigma.decode(code));
+		assertEquals(code, enigma.encode(text));
+		assertEquals(text, enigma.decode(code));
 	}
 	
 	@Test
@@ -161,42 +117,16 @@ public class EnigmaTests {
 			  + "GYKUA CTCDO MOHWX MUUIA UBSTS LRNBZ SZWNR FXWFY SSXJZ VIJHI DISHP RKLKA YUPAD TXQSP INQMA " //
 			  + "TLPIF SVKDA SCTAC DPBOP VHJK-";
 
-		final Enigma encodeEnigma = new Enigma.Builder() //
-				.addCable('A', 'V') //
-				.addCable('B', 'S') //
-				.addCable('C', 'G') //
-				.addCable('D', 'L') //
-				.addCable('F', 'U') //
-				.addCable('H', 'Z') //
-				.addCable('I', 'N') //
-				.addCable('K', 'M') //
-				.addCable('O', 'W') //
-				.addCable('R', 'X') //
-				.setRotor1(Rotor.getRotorV(), 12, 'A') //
-				.setRotor2(Rotor.getRotorIV(), 21, 'L') //
-				.setRotor3(Rotor.getRotorII(), 2, 'B') //
-				.setReflector(Reflector.getReflectorB()) //
-				.build();
-		
-		final Enigma decodeEnigma = new Enigma.Builder() //
-				.addCable('A', 'V') //
-				.addCable('B', 'S') //
-				.addCable('C', 'G') //
-				.addCable('D', 'L') //
-				.addCable('F', 'U') //
-				.addCable('H', 'Z') //
-				.addCable('I', 'N') //
-				.addCable('K', 'M') //
-				.addCable('O', 'W') //
-				.addCable('R', 'X') //
-				.setRotor1(Rotor.getRotorV(), 12, 'A') //
-				.setRotor2(Rotor.getRotorIV(), 21, 'L') //
-				.setRotor3(Rotor.getRotorII(), 2, 'B') //
+		final Enigma enigma = new Enigma.Builder() //
+				.addCables("AV", "BS", "CG", "DL", "FU", "HZ", "IN", "KM", "OW", "RX") //) 
+				.setRotor1(Rotor.getRotorV(), 12, 'A') // 
+				.setRotor2(Rotor.getRotorIV(), 21, 'L') // 
+				.setRotor3(Rotor.getRotorII(), 2, 'B') // 
 				.setReflector(Reflector.getReflectorB()) //
 				.build();	
 		
-		assertEquals(code, encodeEnigma.decode(text));
-		assertEquals(text, decodeEnigma.decode(code));
+		assertEquals(code, enigma.encode(text));
+		assertEquals(text, enigma.decode(code));
 	}
 	
 	@Test
@@ -210,42 +140,16 @@ public class EnigmaTests {
 				"DREIG EHTLA NGSAM ABERS IQERV ORWAE RTSXE INSSI EBENN ULLSE QSXUH RXROE MXEIN SXINF RGTXD " //
 			  + "REIXA UFFLI EGERS TRASZ EMITA NFANG XEINS SEQSX KMXKM XOSTW XKAME NECXK";
 
-		final Enigma encodeEnigma = new Enigma.Builder() //
-				.addCable('A', 'V') //
-				.addCable('B', 'S') //
-				.addCable('C', 'G') //
-				.addCable('D', 'L') //
-				.addCable('F', 'U') //
-				.addCable('H', 'Z') //
-				.addCable('I', 'N') //
-				.addCable('K', 'M') //
-				.addCable('O', 'W') //
-				.addCable('R', 'X') //
+		final Enigma enigma = new Enigma.Builder() //
+				.addCables("AV", "BS", "CG", "DL", "FU", "HZ", "IN", "KM", "OW", "RX") // 
 				.setRotor1(Rotor.getRotorV(), 12, 'D') //
 				.setRotor2(Rotor.getRotorIV(), 21, 'S') //
 				.setRotor3(Rotor.getRotorII(), 2, 'L') //
 				.setReflector(Reflector.getReflectorB()) //
 				.build();
-		
-		final Enigma decodeEnigma = new Enigma.Builder() //
-				.addCable('A', 'V') //
-				.addCable('B', 'S') //
-				.addCable('C', 'G') //
-				.addCable('D', 'L') //
-				.addCable('F', 'U') //
-				.addCable('H', 'Z') //
-				.addCable('I', 'N') //
-				.addCable('K', 'M') //
-				.addCable('O', 'W') //
-				.addCable('R', 'X') //
-				.setRotor1(Rotor.getRotorV(), 12, 'D') //
-				.setRotor2(Rotor.getRotorIV(), 21, 'S') //
-				.setRotor3(Rotor.getRotorII(), 2, 'L') //
-				.setReflector(Reflector.getReflectorB()) //
-				.build();	
-		
-		assertEquals(code, encodeEnigma.decode(text));
-		assertEquals(text, decodeEnigma.decode(code));
+				
+		assertEquals(code, enigma.encode(text));
+		assertEquals(text, enigma.decode(code));
 	}
 	
 	@Test
@@ -259,42 +163,16 @@ public class EnigmaTests {
 				"STEUE REJTA NAFJO RDJAN STAND ORTQU AAACC CVIER NEUNN EUNZW OFAHR TZWON ULSMX XSCHA RNHOR " //
 			  + "STHCO";
 		
-		final Enigma encodeEnigma = new Enigma.Builder() //
-				.addCable('A', 'N') //
-				.addCable('E', 'Z') //
-				.addCable('H', 'K') //
-				.addCable('I', 'J') //
-				.addCable('L', 'R') //
-				.addCable('M', 'Q') //
-				.addCable('O', 'T') //
-				.addCable('P', 'V') //
-				.addCable('S', 'W') //
-				.addCable('U', 'X') //
-				.setRotor1(Rotor.getRotorVIII(), 13, 'V') //
-				.setRotor2(Rotor.getRotorVI(), 8, 'Z') //
+		final Enigma enigma = new Enigma.Builder() //
+				.addCables("AN", "EZ", "HK", "IJ", "LR", "MQ", "OT", "PV", "SW", "UX") // 
+				.setRotor1(Rotor.getRotorVIII(), 13, 'V') // 
+				.setRotor2(Rotor.getRotorVI(), 8, 'Z') // 
 				.setRotor3(Rotor.getRotorIII(), 1, 'U') //
 				.setReflector(Reflector.getReflectorB()) //
 				.build();
 		
-		final Enigma decodeEnigma = new Enigma.Builder() //
-				.addCable('A', 'N') //
-				.addCable('E', 'Z') //
-				.addCable('H', 'K') //
-				.addCable('I', 'J') //
-				.addCable('L', 'R') //
-				.addCable('M', 'Q') //
-				.addCable('O', 'T') //
-				.addCable('P', 'V') //
-				.addCable('S', 'W') //
-				.addCable('U', 'X') //
-				.setRotor1(Rotor.getRotorVIII(), 13, 'V') //
-				.setRotor2(Rotor.getRotorVI(), 8, 'Z') //
-				.setRotor3(Rotor.getRotorIII(), 1, 'U') //
-				.setReflector(Reflector.getReflectorB()) //
-				.build();
-		
-		assertEquals(code, encodeEnigma.decode(text));
-		assertEquals(text, decodeEnigma.decode(code));
+		assertEquals(code, enigma.encode(text));
+		assertEquals(text, enigma.decode(code));
 	}
 	
 	@Test
@@ -312,17 +190,8 @@ public class EnigmaTests {
 		      + "HABCJ WMAKL FKLMY FVNRI ZRVVR TKOFD ANJMO LBGFF LEOPR GTFLV RHOWO PBEKV WMUQF MPWPA RMFHA " //
 			  + "GKXII BG---";
 		
-		final Enigma encodeEnigma = new Enigma.Builder() //
-				.addCable('A', 'T') //
-				.addCable('B', 'L') //
-				.addCable('D', 'F') //
-				.addCable('G', 'J') //
-				.addCable('H', 'M') //
-				.addCable('N', 'W') //
-				.addCable('O', 'P') //
-				.addCable('Q', 'Y') //
-				.addCable('R', 'Z') //
-				.addCable('V', 'X') //
+		final Enigma enigma = new Enigma.Builder() //
+				.addCables("AT", "BL", "DF", "GJ", "HM", "NW", "OP", "QY", "RZ", "VX") // 
 				.setRotor1(Rotor.getRotorI(), 22, 'A') //
 				.setRotor2(Rotor.getRotorIV(), 1, 'N') //
 				.setRotor3(Rotor.getRotorII(), 1, 'J') //
@@ -330,26 +199,8 @@ public class EnigmaTests {
 				.setReflector(Reflector.getReflectorBruno()) //
 				.build();
 		
-		final Enigma decodeEnigma = new Enigma.Builder() //
-				.addCable('A', 'T') //
-				.addCable('B', 'L') //
-				.addCable('D', 'F') //
-				.addCable('G', 'J') //
-				.addCable('H', 'M') //
-				.addCable('N', 'W') //
-				.addCable('O', 'P') //
-				.addCable('Q', 'Y') //
-				.addCable('R', 'Z') //
-				.addCable('V', 'X') //
-				.setRotor1(Rotor.getRotorI(), 22, 'A') //
-				.setRotor2(Rotor.getRotorIV(), 1, 'N') //
-				.setRotor3(Rotor.getRotorII(), 1, 'J') //
-				.setRotor4(Rotor.getRotorBeta(), 1, 'V') //
-				.setReflector(Reflector.getReflectorBruno()) //
-				.build();
-		
-		assertEquals(code, encodeEnigma.decode(text));
-		assertEquals(text, decodeEnigma.decode(code));
+		assertEquals(code, enigma.encode(text));
+		assertEquals(text, enigma.decode(code));
 	}
 	
 }
