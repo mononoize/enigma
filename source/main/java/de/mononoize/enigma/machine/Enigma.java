@@ -189,13 +189,13 @@ public class Enigma {
 		this.m_reflector = builder.m_reflector;
 		this.m_plugboard = builder.m_plugboard;
 		
-		this.m_rotor1Setting[0] = this.m_rotor1.getPostionRing();
+		this.m_rotor1Setting[0] = this.m_rotor1.getPositionRing();
 		this.m_rotor1Setting[1] = this.m_rotor1.getPosition();	
-		this.m_rotor2Setting[0] = this.m_rotor2.getPostionRing();
+		this.m_rotor2Setting[0] = this.m_rotor2.getPositionRing();
 		this.m_rotor2Setting[1] = this.m_rotor2.getPosition();
-		this.m_rotor3Setting[0] = this.m_rotor3.getPostionRing();
+		this.m_rotor3Setting[0] = this.m_rotor3.getPositionRing();
 		this.m_rotor3Setting[1] = this.m_rotor3.getPosition();
-		this.m_rotor4Setting[0] = this.m_rotor4.getPostionRing();
+		this.m_rotor4Setting[0] = this.m_rotor4.getPositionRing();
 		this.m_rotor4Setting[1] = this.m_rotor4.getPosition();		
 		this.m_reflectorSetting = this.m_reflector.getPosition();
 	}
