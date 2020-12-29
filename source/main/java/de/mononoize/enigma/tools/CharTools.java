@@ -45,6 +45,16 @@ public final class CharTools {
 	}
 	
 	/**
+	 * Returns the string representation of the given characters.
+	 *  
+	 * @param characters The characters that shall be concatenated.
+	 * @return The string representation of the given characters.
+	 */
+	public static String valueOf(final char... characters) {
+		return String.valueOf(characters);
+	}
+	
+	/**
 	 * Checks if the given character is one of the Latin alphabet.
 	 * 
 	 * @param character The character to be used.

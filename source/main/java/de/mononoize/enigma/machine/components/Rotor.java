@@ -287,7 +287,7 @@ public class Rotor extends AbstractWheel<Rotor> {
 	 * 
 	 * @return The position of the ring.
 	 */
-	public char getPostionRing() {
+	public char getPositionRing() {
 		return this.m_positionRing;
 	}
 	

@@ -1,6 +1,7 @@
 package de.mononoize.enigma.machine.components;
 
 import static de.mononoize.enigma.tools.CharTools.isInRange;
+import static de.mononoize.enigma.tools.CharTools.valueOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -25,39 +26,47 @@ public class PlugboardTests {
 	@Order(101)
 	public void testAddRemoveCable() {
 		final Plugboard plugboard = new Plugboard(); 
+				
+		assertThrows(NullPointerException.class, () -> plugboard.addCable(null));
+		assertThrows(NullPointerException.class, () -> plugboard.removeCable(null));
 		
 		for(char i = 0; i < Character.MAX_VALUE; i++) {	
 			final char inputCharacter = (char) RANDOM.nextInt(Character.MAX_VALUE - 1);
 			final char outputCharacter = (char) RANDOM.nextInt(Character.MAX_VALUE - 1);
 		
+			final String cable = valueOf(inputCharacter, outputCharacter);
+			
 			if (isInRange(inputCharacter) && isInRange(outputCharacter)) {
 				assertEquals(plugboard, plugboard.addCable(inputCharacter, outputCharacter));
 				assertEquals(plugboard, plugboard.removeCable(inputCharacter, outputCharacter));
+				
+				assertEquals(plugboard, plugboard.addCable(cable));
+				assertEquals(plugboard, plugboard.removeCable(cable));
 			} else {
 				assertThrows(IllegalArgumentException.class, () -> plugboard.addCable(inputCharacter, outputCharacter));
 				assertThrows(IllegalArgumentException.class, () -> plugboard.removeCable(inputCharacter, outputCharacter));
+				
+				assertThrows(IllegalArgumentException.class, () -> plugboard.addCable(cable));
+				assertThrows(IllegalArgumentException.class, () -> plugboard.removeCable(cable));
 			}
-		}						
+		}
 	}
 	
 	@Test
 	@Order(102)
+	public void testAddRemoveCables() {
+		final Plugboard plugboard = new Plugboard();
+		
+		assertThrows(NullPointerException.class, () -> plugboard.addCables((String[]) null));
+		assertThrows(NullPointerException.class, () -> plugboard.removeCables((String[]) null));
+	}
+	
+	@Test
+	@Order(103)
 	public void testGetForward() {
 		final Plugboard plugboard = new Plugboard() //
-				.addCable('A', 'E') //
-				.addCable('B', 'J') //
-				.addCable('C', 'M') //
-				.addCable('D', 'Z') //
-				.addCable('F', 'L') //
-				.addCable('G', 'Y') //
-				.addCable('H', 'X') //
-				.addCable('I', 'V') //
-				.addCable('K', 'W') //
-				.addCable('L', 'F') //
-				.addCable('N', 'R') //
-				.addCable('O', 'Q') //
-				.addCable('P', 'U');
-		
+				.addCables("AE", "BJ", "CM", "DZ", "FL", "GY", "HX", "IV", "KW", "NR", "OQ", "PU", "ST");
+
 		for(char i = 0; i < Character.MAX_VALUE; i++) {
 			final char inputCharacter = i;
 			
@@ -70,22 +79,10 @@ public class PlugboardTests {
 	}
 	
 	@Test
-	@Order(103)
+	@Order(104)
 	public void testGetReverse() {
 		final Plugboard plugboard = new Plugboard() //
-				.addCable('A', 'E') //
-				.addCable('B', 'J') //
-				.addCable('C', 'M') //
-				.addCable('D', 'Z') //
-				.addCable('F', 'L') //
-				.addCable('G', 'Y') //
-				.addCable('H', 'X') //
-				.addCable('I', 'V') //
-				.addCable('K', 'W') //
-				.addCable('L', 'F') //
-				.addCable('N', 'R') //
-				.addCable('O', 'Q') //
-				.addCable('P', 'U');
+				.addCables("AE", "BJ", "CM", "DZ", "FL", "GY", "HX", "IV", "KW", "NR", "OQ", "PU", "ST");
 		
 		for(char i = 0; i < Character.MAX_VALUE; i++) {
 			final char inputCharacter = i;

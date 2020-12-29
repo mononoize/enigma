@@ -60,7 +60,7 @@ public class RotorTests {
 			final char inputCharacter = i;
 			
 			if (isInRange(inputCharacter)) {
-				assertEquals(inputCharacter, rotor.setPositionRing(inputCharacter).getPostionRing());
+				assertEquals(inputCharacter, rotor.setPositionRing(inputCharacter).getPositionRing());
 			} else {
 				assertThrows(IllegalArgumentException.class, () -> rotor.setPositionRing(inputCharacter));
 			}
@@ -76,7 +76,7 @@ public class RotorTests {
 			final int inputNumber = i;
 			
 			if ((1 <= i) && (i <= 26)) {
-				assertEquals(toChar(i - 1), rotor.setPositionRing(i).getPostionRing());
+				assertEquals(toChar(i - 1), rotor.setPositionRing(i).getPositionRing());
 			} else {
 				assertThrows(IllegalArgumentException.class, () -> rotor.setPositionRing(inputNumber));
 			}
