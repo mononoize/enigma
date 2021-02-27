@@ -6,6 +6,8 @@ import static de.mononoize.enigma.tools.CharTools.toIndex;
 import static de.mononoize.enigma.tools.MathTools.mod;
 
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,6 +28,36 @@ public class Plugboard extends AbstractWiring<Plugboard> {
 	 */
 	public Plugboard() {
 		super("PLB", "Plugboard", ALPHABET);
+	}
+	
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder()
+				.append(this.m_name)
+				.append(this.m_description)
+				.append(this.m_forwardMapping)
+				.append(this.m_reverseMapping)
+				.hashCode();
+	}
+
+	@Override
+	public boolean equals(final Object object) {
+		if (this == object) {
+			return true;
+		}
+		
+		if (!(object instanceof Plugboard)) {
+			return false;
+		}
+		
+		final Plugboard that = (Plugboard) object;
+		
+		return new EqualsBuilder()
+				.append(this.m_name, that.m_name)
+				.append(this.m_description, that.m_description)
+				.append(this.m_forwardMapping, that.m_forwardMapping)
+				.append(this.m_reverseMapping, that.m_reverseMapping)
+				.isEquals();
 	}
 	
 	@Override

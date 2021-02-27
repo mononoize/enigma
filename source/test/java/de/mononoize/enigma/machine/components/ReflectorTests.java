@@ -6,8 +6,12 @@ import static de.mononoize.enigma.tools.CharTools.toChar;
 import static de.mononoize.enigma.tools.CharTools.toIndex;
 import static de.mononoize.enigma.tools.MathTools.mod;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -24,6 +28,19 @@ public class ReflectorTests {
 
 	@Test
 	@Order(101)
+	public void testGetAll() {
+		final List<Reflector> expected = Arrays.asList(
+				Reflector.getReflectorA(),
+				Reflector.getReflectorB(),
+				Reflector.getReflectorC(),
+				Reflector.getReflectorBruno(),
+				Reflector.getReflectorCaesar());
+	
+		assertIterableEquals(expected, Reflector.getReflectors());
+	}
+	
+	@Test
+	@Order(102)
 	public void testSetPosition() {
 		final Reflector reflector = Reflector.getReflectorA();	
 		
@@ -39,7 +56,7 @@ public class ReflectorTests {
 	}
 	
 	@Test
-	@Order(102)
+	@Order(103)
 	public void testIncPosition() {
 		final Reflector reflector = Reflector.getReflectorA();
 		
@@ -51,7 +68,7 @@ public class ReflectorTests {
 	}
 	
 	@Test
-	@Order(103)
+	@Order(104)
 	public void testGetForward() {
 		final Reflector reflector = Reflector.getReflectorA();
 		
@@ -67,7 +84,7 @@ public class ReflectorTests {
 	}
 	
 	@Test
-	@Order(104)
+	@Order(105)
 	public void testGetReverse() {
 		final Reflector reflector = Reflector.getReflectorA();
 		

@@ -4,8 +4,13 @@ import static de.mononoize.enigma.tools.CharTools.toChar;
 import static de.mononoize.enigma.tools.CharTools.toIndex;
 import static de.mononoize.enigma.tools.MathTools.mod;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,6 +47,63 @@ public class Rotor extends AbstractWheel<Rotor> {
 	private Rotor(final String name, final String description, final String wiring, final String notches) {
 		super(name, description, wiring);
 		this.m_notches = notches.toCharArray();
+	}
+	
+	
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder()
+				.append(this.m_name)
+				.append(this.m_description)
+				.append(this.m_forwardMapping)
+				.append(this.m_reverseMapping)
+				.append(this.m_notches)
+				.append(this.m_positionRing)
+				.append(this.m_position)
+				.hashCode();
+	}
+
+	@Override
+	public boolean equals(final Object object) {
+		if (this == object) {
+			return true;
+		}
+		
+		if (!(object instanceof Rotor)) {
+			return false;
+		}
+		
+		final Rotor that = (Rotor) object;
+		
+		return new EqualsBuilder()
+				.append(this.m_name, that.m_name)
+				.append(this.m_description, that.m_description)
+				.append(this.m_forwardMapping, that.m_forwardMapping)
+				.append(this.m_reverseMapping, that.m_reverseMapping)
+				.append(this.m_notches, that.m_notches)
+				.append(this.m_positionRing, that.m_positionRing)
+				.append(this.m_position, that.m_position)
+				.isEquals();
+	}
+	
+	/**
+	 * Returns a list of all available rotors.
+	 * 
+	 * @return A list of all available rotors.
+	 */
+	public static List<Rotor> getRotors() {
+		return Arrays.asList(
+				getRotorNeutral(),
+				getRotorI(),
+				getRotorII(),
+				getRotorIII(),
+				getRotorIV(),
+				getRotorV(),
+				getRotorVI(),
+				getRotorVII(),
+				getRotorVIII(),
+				getRotorBeta(),
+				getRotorGamma());
 	}
 	
 	/**

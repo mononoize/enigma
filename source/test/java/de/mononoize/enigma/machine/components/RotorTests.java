@@ -6,8 +6,12 @@ import static de.mononoize.enigma.tools.CharTools.toChar;
 import static de.mononoize.enigma.tools.CharTools.toIndex;
 import static de.mononoize.enigma.tools.MathTools.mod;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -23,8 +27,28 @@ import org.junit.jupiter.api.TestMethodOrder;
 @TestMethodOrder(OrderAnnotation.class)
 public class RotorTests {
 	
+
 	@Test
 	@Order(101)
+	public void testGetAll() {
+		final List<Rotor> rotors = Arrays.asList(
+				Rotor.getRotorNeutral(),
+				Rotor.getRotorI(),
+				Rotor.getRotorII(),
+				Rotor.getRotorIII(),
+				Rotor.getRotorIV(),
+				Rotor.getRotorV(),
+				Rotor.getRotorVI(),
+				Rotor.getRotorVII(),
+				Rotor.getRotorVIII(),
+				Rotor.getRotorBeta(),
+				Rotor.getRotorGamma());
+		
+		assertIterableEquals(rotors, Rotor.getRotors());
+	}
+	
+	@Test
+	@Order(102)
 	public void testSetPosition() {
 		final Rotor rotor = Rotor.getRotorI();	
 		
@@ -40,7 +64,7 @@ public class RotorTests {
 	}
 	
 	@Test
-	@Order(102)
+	@Order(103)
 	public void testIncPosition() {
 		final Rotor rotor = Rotor.getRotorI();
 
@@ -52,7 +76,7 @@ public class RotorTests {
 	}
 	
 	@Test
-	@Order(103)
+	@Order(104)
 	public void testSetPositionRingChar() {
 		final Rotor rotor = Rotor.getRotorI();
 
@@ -68,7 +92,7 @@ public class RotorTests {
 	}
 	
 	@Test
-	@Order(104)
+	@Order(105)
 	public void testSetPositionRingInt() {
 		final Rotor rotor = Rotor.getRotorI();
 
@@ -84,7 +108,7 @@ public class RotorTests {
 	}
 	
 	@Test
-	@Order(105)
+	@Order(106)
 	public void testGetForward() {
 		final Rotor rotor = Rotor.getRotorI();
 
@@ -100,7 +124,7 @@ public class RotorTests {
 	}
 	
 	@Test
-	@Order(106)
+	@Order(107)
 	public void testGetReverse() {
 		final Rotor rotor = Rotor.getRotorI();
 
