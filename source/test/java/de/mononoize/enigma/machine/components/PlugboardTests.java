@@ -27,9 +27,6 @@ public class PlugboardTests {
 	public void testAddRemoveCable() {
 		final Plugboard plugboard = new Plugboard(); 
 				
-		assertThrows(NullPointerException.class, () -> plugboard.addCable(null));
-		assertThrows(NullPointerException.class, () -> plugboard.removeCable(null));
-		
 		for(char i = 0; i < Character.MAX_VALUE; i++) {	
 			final char inputCharacter = (char) RANDOM.nextInt(Character.MAX_VALUE - 1);
 			final char outputCharacter = (char) RANDOM.nextInt(Character.MAX_VALUE - 1);
@@ -40,14 +37,14 @@ public class PlugboardTests {
 				assertEquals(plugboard, plugboard.addCable(inputCharacter, outputCharacter));
 				assertEquals(plugboard, plugboard.removeCable(inputCharacter, outputCharacter));
 				
-				assertEquals(plugboard, plugboard.addCable(cable));
-				assertEquals(plugboard, plugboard.removeCable(cable));
+				assertEquals(plugboard, plugboard.addCables(cable));
+				assertEquals(plugboard, plugboard.removeCables(cable));
 			} else {
 				assertThrows(IllegalArgumentException.class, () -> plugboard.addCable(inputCharacter, outputCharacter));
 				assertThrows(IllegalArgumentException.class, () -> plugboard.removeCable(inputCharacter, outputCharacter));
 				
-				assertThrows(IllegalArgumentException.class, () -> plugboard.addCable(cable));
-				assertThrows(IllegalArgumentException.class, () -> plugboard.removeCable(cable));
+				assertThrows(IllegalArgumentException.class, () -> plugboard.addCables(cable));
+				assertThrows(IllegalArgumentException.class, () -> plugboard.removeCables(cable));
 			}
 		}
 	}
@@ -57,15 +54,15 @@ public class PlugboardTests {
 	public void testAddRemoveCables() {
 		final Plugboard plugboard = new Plugboard();
 		
-		assertThrows(NullPointerException.class, () -> plugboard.addCables((String[]) null));
-		assertThrows(NullPointerException.class, () -> plugboard.removeCables((String[]) null));
+		assertThrows(NullPointerException.class, () -> plugboard.addCables(null));
+		assertThrows(NullPointerException.class, () -> plugboard.removeCables(null));
 	}
 	
 	@Test
 	@Order(103)
 	public void testGetForward() {
 		final Plugboard plugboard = new Plugboard() //
-				.addCables("AE", "BJ", "CM", "DZ", "FL", "GY", "HX", "IV", "KW", "NR", "OQ", "PU", "ST");
+				.addCables("AE BJ CM DZ FL GY HX IV KW NR OQ PU ST");
 
 		for(char i = 0; i < Character.MAX_VALUE; i++) {
 			final char inputCharacter = i;
@@ -82,7 +79,7 @@ public class PlugboardTests {
 	@Order(104)
 	public void testGetReverse() {
 		final Plugboard plugboard = new Plugboard() //
-				.addCables("AE", "BJ", "CM", "DZ", "FL", "GY", "HX", "IV", "KW", "NR", "OQ", "PU", "ST");
+				.addCables("AE BJ CM DZ FL GY HX IV KW NR OQ PU ST");
 		
 		for(char i = 0; i < Character.MAX_VALUE; i++) {
 			final char inputCharacter = i;

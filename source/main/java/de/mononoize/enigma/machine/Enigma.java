@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import de.mononoize.enigma.machine.components.Plugboard;
 import de.mononoize.enigma.machine.components.Reflector;
 import de.mononoize.enigma.machine.components.Rotor;
+import de.mononoize.enigma.tools.StringTools;
 
 /**
  * <p>An electro-mechanical encryption device.</p>
@@ -41,6 +42,8 @@ public class Enigma {
 
 		private Reflector m_reflector;
 	 
+		private int m_groupLength = 5;
+		
 		public Builder() {
 		}
 		
@@ -94,13 +97,13 @@ public class Enigma {
 			return this;
 		}
 		
-		public Builder addCable(final String cable) {
-			this.m_plugboard.addCable(cable);
+		public Builder addCables(final String cables) {
+			this.m_plugboard.addCables(cables);
 			return this;
 		}
-				
-		public Builder addCables(final String ... cables) {
-			this.m_plugboard.addCables(cables);
+		
+		public Builder setGroupLength(final int groupLength) {
+			this.m_groupLength = groupLength;
 			return this;
 		}
 				
@@ -152,6 +155,11 @@ public class Enigma {
 	private Reflector m_reflector;
 
 	/**
+	 * The output group length.
+	 */
+	private int m_groupLength;
+	
+	/**
 	 * The setting of the 1st (right) rotor.
 	 */
 	private char[] m_rotor1Setting = new char[2];
@@ -188,6 +196,7 @@ public class Enigma {
 		this.m_rotor4 = builder.m_rotor4;
 		this.m_reflector = builder.m_reflector;
 		this.m_plugboard = builder.m_plugboard;
+		this.m_groupLength = builder.m_groupLength;
 		
 		this.m_rotor1Setting[0] = this.m_rotor1.getPositionRing();
 		this.m_rotor1Setting[1] = this.m_rotor1.getPosition();	
@@ -289,20 +298,9 @@ public class Enigma {
 			LOGGER.debug("OUTPUT      : {}", reversePlugboard);
 			
 			result.append(reversePlugboard);
-
-			// STEP 4: Chop result into groups of 5 characters.
-			if (((result.length() + 1) % 6 == 0) && ((i != (text.length() - 1)))) {
-				result.append(" ");
-			}
 		}
 
-		// STEP 5: Pad last group to 5 characters.
-		final int count = (5 - (result.length() % 6));
-		for (int i = 0; i < count; i++) {
-			result.append("-");
-		}
-	
-		return result.toString();
+		return StringTools.format(result.toString(), this.m_groupLength);
 	}
 	
 }

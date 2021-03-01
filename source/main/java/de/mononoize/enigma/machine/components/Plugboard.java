@@ -5,6 +5,7 @@ import static de.mononoize.enigma.tools.CharTools.toChar;
 import static de.mononoize.enigma.tools.CharTools.toIndex;
 import static de.mononoize.enigma.tools.MathTools.mod;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -141,19 +142,26 @@ public class Plugboard extends AbstractWiring<Plugboard> {
 		
 		return this.self();
 	}
-	
+		
 	/**
-	 * Adds a cable to the {@code Plugboard} to swap the first character of the given {@code String} with the second
-	 * character.
+	 * Adds one or more cable(s) to the {@code Plugboard} to swap characters. 
 	 * 
-	 * @param cable The input and output characters that shall be swapped.
+	 * The {@code cables} are a whitespace-separated list of character pairs. For each pair the first character will be
+	 * swapped with the second one.
+	 * 
+	 * @param cables The input and output characters that shall be swapped.
 	 * @return A reference to this {@code Plugboard}.
 	 */
-	public Plugboard addCable(final String cable) {
-		Validate.notBlank(cable);
-		Validate.isTrue(cable.length() == 2);
+	public Plugboard addCables(final String cables) {
+		Validate.notBlank(cables);
+		Validate.isTrue(cables.length() >= 2);
 		
-		return this.addCable(cable.charAt(0), cable.charAt(1));
+		for (final String cable : StringUtils.split(cables)) {
+			Validate.isTrue(cable.length() == 2);
+			this.addCable(cable.charAt(0), cable.charAt(1));
+		}
+		
+		return this.self();
 	}
 	
 	/**
@@ -185,48 +193,24 @@ public class Plugboard extends AbstractWiring<Plugboard> {
 		
 		return this.self();
 	}
-
+		
 	/**
-	 * Removes a cable from the {@code Plugboard} to un-swap the first character of the given {@code String} with the 
+	 * Removes one or more cable(s) from the {@code Plugboard} to un-swap characters. 
 	 * second character.
+	 * 
+	 * The {@code cables} are a whitespace-separated list of character pairs. For each pair the first character will be
+	 * un-swapped with the second one.
 	 * 
 	 * @param cable The input and output character that shall be swapped.
 	 * @return A reference to this {@code Plugboard}.
 	 */
-	public Plugboard removeCable(final String cable) {
-		Validate.notBlank(cable);
-		Validate.isTrue(cable.length() == 2);
+	public Plugboard removeCables(final String cables) {
+		Validate.notBlank(cables);
+		Validate.isTrue(cables.length() >= 2);
 		
-		return this.removeCable(cable.charAt(0), cable.charAt(1));
-	}
-	
-	/**
-	 * Adds cables to the {@code Plugboard} to swap characters.
-	 * 
-	 * @param cables The input and output characters that shall be swapped.
-	 * @return A reference to this {@code Plugboard}.
-	 */
-	public Plugboard addCables(final String ... cables) {
-		Validate.notNull(cables);
-		
-		for (final String cable : cables) {
-			this.addCable(cable);
-		}
-	
-		return this.self();
-	}
-	
-	/**
-	 * Removes cables from the {@code Plugboard} to un-swap characters.
-	 * 
-	 * @param cable The input and output characters that shall be un-swapped.
-	 * @return A reference to this {@code Plugboard}.
-	 */
-	public Plugboard removeCables(final String ... cables) {
-		Validate.notNull(cables);
-		
-		for (final String cable : cables) {
-			this.removeCable(cable);
+		for (final String cable : StringUtils.split(cables)) {
+			Validate.isTrue(cable.length() == 2);
+			this.removeCable(cable.charAt(0), cable.charAt(1));
 		}
 	
 		return this.self();

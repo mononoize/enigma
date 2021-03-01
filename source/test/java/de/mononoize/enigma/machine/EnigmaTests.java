@@ -27,21 +27,31 @@ public class EnigmaTests {
 		
 		assertThrows(NullPointerException.class, () -> builder.build());
 		 
-		builder.setReflector(Reflector.getReflectorA());
-		assertThrows(NullPointerException.class, () -> builder.build());
-				
-		builder.setRotor1(Rotor.getRotorNeutral(), 'A', 'A');
-		assertThrows(NullPointerException.class, () -> builder.build());
-
-		builder.setRotor2(Rotor.getRotorNeutral(), 'A', 'A');
-		assertThrows(NullPointerException.class, () -> builder.build());
+		for (final Reflector reflector : Reflector.getReflectors()) {
+			builder.setReflector(reflector);
+			assertThrows(NullPointerException.class, () -> builder.build());
+		}		
 		
-		builder.setRotor3(Rotor.getRotorNeutral(), 'A', 'A');
-		assertTrue(builder.build() instanceof Enigma);
+		for (final Rotor rotor : Rotor.getRotors()) {
+			builder.setRotor1(rotor, 'A', 'A');
+			assertThrows(NullPointerException.class, () -> builder.build());
+		}
 		
-		builder.setRotor4(Rotor.getRotorNeutral(), 'A', 'A');
-		assertTrue(builder.build() instanceof Enigma);
-
+		for (final Rotor rotor : Rotor.getRotors()) {
+			builder.setRotor2(rotor, 'A', 'A');
+			assertThrows(NullPointerException.class, () -> builder.build());
+		}
+		
+		for (final Rotor rotor : Rotor.getRotors()) {
+			builder.setRotor3(rotor, 'A', 'A');
+			assertTrue(builder.build() instanceof Enigma);
+		}
+		
+		for (final Rotor rotor : Rotor.getRotors()) {
+			builder.setRotor4(rotor, 'A', 'A');
+			assertTrue(builder.build() instanceof Enigma);
+		}
+		
 		builder.addCable('A','A');
 		assertTrue(builder.build() instanceof Enigma);
 	}
@@ -68,7 +78,7 @@ public class EnigmaTests {
 			  + "JPYJO SRYNV AGIXK ZSFXF VGVAV IQK--";
 		
 		final Enigma enigma = new Enigma.Builder() //
-				.addCables("AZ", "BY", "CX", "DW", "EV", "FU", "GT", "HS", "IR", "JQ") // 
+				.addCables("AZ BY CX DW EV FU GT HS IR JQ") // 
 				.setRotor1(Rotor.getRotorII(), 5, 'P') // 
 				.setRotor2(Rotor.getRotorIII(), 3, 'F') // 
 				.setRotor3(Rotor.getRotorVII(), 8, 'M') //
@@ -93,7 +103,7 @@ public class EnigmaTests {
 			  + "RDISI KBGPM YVXUZ";
 		
 		final Enigma enigma = new Enigma.Builder() //
-				.addCables("AM", 				"FI", "NV", "PS", "TU", "WZ") // 
+				.addCables("AM FI NV PS TU WZ") // 
 				.setRotor1(Rotor.getRotorIII(), 22, 'L') // 
 				.setRotor2(Rotor.getRotorI(), 13, 'B') //
 				.setRotor3(Rotor.getRotorII(), 24, 'A') //
@@ -118,7 +128,7 @@ public class EnigmaTests {
 			  + "TLPIF SVKDA SCTAC DPBOP VHJK-";
 
 		final Enigma enigma = new Enigma.Builder() //
-				.addCables("AV", "BS", "CG", "DL", "FU", "HZ", "IN", "KM", "OW", "RX") //) 
+				.addCables("AV BS CG DL FU HZ IN KM OW RX") //) 
 				.setRotor1(Rotor.getRotorV(), 12, 'A') // 
 				.setRotor2(Rotor.getRotorIV(), 21, 'L') // 
 				.setRotor3(Rotor.getRotorII(), 2, 'B') // 
@@ -141,7 +151,7 @@ public class EnigmaTests {
 			  + "REIXA UFFLI EGERS TRASZ EMITA NFANG XEINS SEQSX KMXKM XOSTW XKAME NECXK";
 
 		final Enigma enigma = new Enigma.Builder() //
-				.addCables("AV", "BS", "CG", "DL", "FU", "HZ", "IN", "KM", "OW", "RX") // 
+				.addCables("AV BS CG DL FU HZ IN KM OW RX") // 
 				.setRotor1(Rotor.getRotorV(), 12, 'D') //
 				.setRotor2(Rotor.getRotorIV(), 21, 'S') //
 				.setRotor3(Rotor.getRotorII(), 2, 'L') //
@@ -164,7 +174,7 @@ public class EnigmaTests {
 			  + "STHCO";
 		
 		final Enigma enigma = new Enigma.Builder() //
-				.addCables("AN", "EZ", "HK", "IJ", "LR", "MQ", "OT", "PV", "SW", "UX") // 
+				.addCables("AN EZ HK IJ LR MQ OT PV SW UX") // 
 				.setRotor1(Rotor.getRotorVIII(), 13, 'V') // 
 				.setRotor2(Rotor.getRotorVI(), 8, 'Z') // 
 				.setRotor3(Rotor.getRotorIII(), 1, 'U') //
@@ -191,7 +201,7 @@ public class EnigmaTests {
 			  + "GKXII BG---";
 		
 		final Enigma enigma = new Enigma.Builder() //
-				.addCables("AT", "BL", "DF", "GJ", "HM", "NW", "OP", "QY", "RZ", "VX") // 
+				.addCables("AT BL DF GJ HM NW OP QY RZ VX") // 
 				.setRotor1(Rotor.getRotorI(), 22, 'A') //
 				.setRotor2(Rotor.getRotorIV(), 1, 'N') //
 				.setRotor3(Rotor.getRotorII(), 1, 'J') //
@@ -203,4 +213,51 @@ public class EnigmaTests {
 		assertEquals(text, enigma.decode(code));
 	}
 	
+	@Test
+	@Order(206)
+	public void testHistoricalMessage06() {
+		final String text = //
+				"GRUPE VONBR EMENW ELESI EBENE INSME TERAB EINSN ULNUL NULUH RUNBR AUCHB ARACH TENAB EINSV " //
+			  + "IERUH RAUFA BSTIM UNGDR EISEC HSMET ERG--";
+	
+		final String code = 
+				"ODXOD HQKXT REYPF LGSKH WOPDI JQCEL MPFEE JTKTI ASWQE HDVTO MJCOI HRWQF CKERT WNQMX GBDWW " //
+			   +"FMGVJ NWPQT XXOWE OPIEY DPGDV QDNRD MJM--";
+				
+		final Enigma enigma = new Enigma.Builder() //
+				.addCables("AB EG JS LQ OT VY") // 
+				.setRotor1(Rotor.getRotorII(), 'G', 'P') //
+				.setRotor2(Rotor.getRotorVI(), 'T', 'X') //
+				.setRotor3(Rotor.getRotorI(), 'A', 'Q') //
+				.setReflector(Reflector.getReflectorB()) //
+				.build();
+		
+		assertEquals(code, enigma.encode(text));
+		assertEquals(text, enigma.decode(code));		
+	}
+	
+	@Test
+	@Order(207)
+	public void testHistoricalMessage07() {
+		final String text = //
+				"FXDXU UUOST YFUNC QUUUF XWTTX VVVUU UEINS EINSN ULDRE IKKEI SELEK KXXIS TSECH SSTUE NDLIC " //
+			  + "HESDO CKENV ORMIT TAGSA MDREI XFUNF XINRE NDSBU RGGEM XFXDX UUUOS TMOEG LICHL";
+		
+		final String code = 
+				"TWNHY AZGBI LSHEW PGLBP QLWQE KITIA FGZHW IMCWD FXPAF EILQZ WFNRF TTQHU OADVL RLGAO QKVLW " //
+			  + "LSJHW OFJJS LUVEY NRRAJ AQDKQ BGMFY CEVKP FJPKO WHHQZ YZEQR TQIKK XIXTF POEMI";
+				
+		final Enigma enigma = new Enigma.Builder() //
+				.addCables("AE BF CM DQ HU JN LX PR SZ VW") // 
+				.setRotor1(Rotor.getRotorVIII(), 'L', 'Q') //
+				.setRotor2(Rotor.getRotorVI(), 'E', 'Z') //
+				.setRotor3(Rotor.getRotorV(), 'P', 'V') //
+				.setRotor4(Rotor.getRotorBeta(), 'E', 'M') //
+				.setReflector(Reflector.getReflectorCaesar()) //
+				.build();
+		
+		assertEquals(code, enigma.encode(text));
+		assertEquals(text, enigma.decode(code));		
+	}
+		
 }
